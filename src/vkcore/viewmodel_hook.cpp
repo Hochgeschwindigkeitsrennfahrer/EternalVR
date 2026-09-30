@@ -167,7 +167,19 @@ void onViewmodel(const HookRegisters& regs) {
         return;
     }
     safeCopy(originAt, newOrigin, sizeof(newOrigin));
-    safeCopy(axisAt, newAxis, sizeof(newAxis));
+    if (cfg.hideViewmodel) {
+        // Static-hand replacements: collapse the native arms/gun to a point
+        // at the hand. The pose bookkeeping below (off-hand joint, counters)
+        // still runs on the real hand pose.
+        static const float hiddenAxis[9] = {};
+        safeCopy(axisAt, hiddenAxis, sizeof(hiddenAxis));
+        static std::atomic<bool> hideLogged{false};
+        if (!hideLogged.exchange(true)) {
+            EVR_LOG("%s: viewmodel hidden (ETERNALVR_HIDE_VIEWMODEL=1)", kTag);
+        }
+    } else {
+        safeCopy(axisAt, newAxis, sizeof(newAxis));
+    }
     s.viewmodelWrites.fetch_add(1, std::memory_order_relaxed);
     {
         std::lock_guard lock(s.viewMutex);

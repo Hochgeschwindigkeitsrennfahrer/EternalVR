@@ -35,6 +35,8 @@
 //                                               (off by default; docs/BHAPTICS.md)
 //   ETERNALVR_BHAPTICS_INTENSITY  0 to 1        the bHaptics effects' strength (1)
 //   ETERNALVR_VIEWMODEL      1 / 0              the game's weapon and arms at the controller
+//   ETERNALVR_HIDE_VIEWMODEL 1 / 0              collapse the native viewmodel to a point
+//                                               (static-hand replacements; default off)
 //   ETERNALVR_WEAPON_FOV     1 / 0              the weapon drawn with the headset's FOV
 //   ETERNALVR_VIEWMODEL_OFFSET  f,l,u[,pitch,yaw,roll]  one offset for every weapon (tuning)
 //   ETERNALVR_SEATED         1 / 0              the seated viewmodel offsets (T-074)
@@ -135,6 +137,8 @@ struct ControllerSettings {
     bool bhaptics = false;                     // docs/BHAPTICS.md
     float bhapticsIntensity = 1.0f;
     bool viewmodel = true;
+    // Collapse the native viewmodel to a point (static-hand replacements).
+    bool hideViewmodel = false;
     bool weaponFov = true;
     bool seated = false;
     std::optional<game::WeaponOffset> viewmodelOffset;
