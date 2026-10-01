@@ -46,6 +46,7 @@ TEST_CASE("defaults: on, head aim and head locomotion, smooth turning, right-han
     CHECK(s.path == InputPath::Auto);
     CHECK(s.shotOrigin == ShotOrigin::Hand);
     CHECK(s.viewmodel);
+    CHECK_FALSE(s.hideViewmodel);
     CHECK(s.weaponFov);
     CHECK_FALSE(s.seated);
     CHECK_FALSE(s.viewmodelOffset.has_value());
@@ -66,6 +67,7 @@ TEST_CASE("every setting reads its documented values") {
                                {"ETERNALVR_SHOT_ORIGIN", "eye"},
                                {"ETERNALVR_AIM_SMOOTHING", "0.6"},
                                {"ETERNALVR_VIEWMODEL", "0"},
+                               {"ETERNALVR_HIDE_VIEWMODEL", "1"},
                                {"ETERNALVR_WEAPON_FOV", "off"},
                                {"ETERNALVR_SEATED", "yes"},
                                {"ETERNALVR_VIEWMODEL_OFFSET", "-0.2,0.1,0.15"},
@@ -85,6 +87,7 @@ TEST_CASE("every setting reads its documented values") {
     CHECK(s.shotOrigin == ShotOrigin::Eye);
     CHECK(s.aimSmoothing == 0.6f);
     CHECK_FALSE(s.viewmodel);
+    CHECK(s.hideViewmodel);
     CHECK_FALSE(s.weaponFov);
     CHECK(s.seated);
     REQUIRE(s.viewmodelOffset.has_value());

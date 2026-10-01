@@ -174,6 +174,7 @@ ControllerSettingsResult parseControllerSettings(const SettingLookup& lookup) {
     r.range("ETERNALVR_BHAPTICS_INTENSITY", 0.0f, 1.0f, s.bhapticsIntensity);
 
     r.flag("ETERNALVR_VIEWMODEL", s.viewmodel);
+    r.flag("ETERNALVR_HIDE_VIEWMODEL", s.hideViewmodel);
     r.flag("ETERNALVR_WEAPON_FOV", s.weaponFov);
     r.flag("ETERNALVR_SEATED", s.seated);
     r.flag("ETERNALVR_CONTROLLERS_TRACE", s.trace);
